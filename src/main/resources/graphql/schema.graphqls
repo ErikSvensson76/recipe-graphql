@@ -1,0 +1,9 @@
+type Query {
+    findIngredientById(id: ID!) : Ingredient
+    searchIngredients(ingredientName: String!) : [Ingredient]
+}
+
+type Mutation {
+    saveIngredient(ingredientInput: IngredientInput!) : Ingredient
+    saveIngredients(ingredientsInputs: [IngredientInput]) : [Ingredient]
+}
