@@ -1,0 +1,14 @@
+
+input RecipeIngredientInput {
+    id: ID
+    ingredientName: String!
+    amount: Float!
+    measurement: String!
+}
+
+type RecipeIngredient {
+    id: ID
+    ingredient: Ingredient
+    amount: Float
+    measurement: String
+}

@@ -1,11 +1,11 @@
 
 input IngredientInput {
-    id: String
+    id: ID
     ingredientName: String!
 }
 
 type Ingredient {
-    id: String
+    id: ID
     ingredientName: String
 }
 
