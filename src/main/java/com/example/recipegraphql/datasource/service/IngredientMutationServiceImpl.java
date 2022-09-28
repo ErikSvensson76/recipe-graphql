@@ -51,7 +51,8 @@ public class IngredientMutationServiceImpl implements IngredientMutationService{
 
     @Transactional
     public DBIngredient create(IngredientInput dto){
-        return repository.save(mappingService.convert(dto));
+        return repository.findByIngredientName(dto.getIngredientName())
+                .orElse(repository.save(mappingService.convert(dto)));
     }
 
     @Transactional
@@ -59,6 +60,13 @@ public class IngredientMutationServiceImpl implements IngredientMutationService{
         DBIngredient DBIngredient = repository.findById(id)
                 .orElseThrow(AppResourceNotFoundException.of(DBIngredient.class, id));
 
+        var optionalIngredient = repository.findByIngredientName(dto.getIngredientName());
+        if(optionalIngredient.isPresent()){
+            DBIngredient fetchedIngredient = optionalIngredient.get();
+            if(!fetchedIngredient.getId().equals(id)){
+                return fetchedIngredient;
+            }
+        }
 
         return repository.save(copyFromCommand(dto, DBIngredient));
     }
